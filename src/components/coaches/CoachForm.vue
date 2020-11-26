@@ -47,6 +47,7 @@ export default {
       areas: [],
     };
   },
+  emits: ['save-data'],
   methods: {
     submitForm() {
       const formData = {
@@ -56,7 +57,7 @@ export default {
         rate: this.rate,
         areas: this.areas,
       };
-      console.log(formData);
+      this.$emit('save-data', formData);
     },
   },
 };
