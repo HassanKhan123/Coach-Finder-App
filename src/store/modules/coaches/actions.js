@@ -26,5 +26,27 @@ export default {
       ...coachData,
       id: userId
     });
+  },
+  async loadCoaches(context) {
+    const res = await fetch(
+      `https://vue-find-a-coach-a907f.firebaseio.com/coaches.json`
+    );
+    const responseData = await res.json();
+    if (!res.ok) {
+      //
+    }
+    const coaches = [];
+    for (const key in responseData) {
+      const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+        areas: responseData[key].areas
+      };
+      coaches.push(coach);
+    }
+    context.commit('setCoaches', coaches);
   }
 };
