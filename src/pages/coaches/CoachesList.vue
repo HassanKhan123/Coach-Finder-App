@@ -1,38 +1,40 @@
 <template>
-  <base-dialog :show="!!error" title="An error occurred" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <CoachFilter @change-filter="setFilters" />
-  </section>
-
-  <base-card>
+  <div>
+    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
     <section>
-      <div class="controls">
-        <base-button mode="outline" @click="loadCoaches(true)"
-          >Refresh</base-button
-        >
-        <base-button to="/register" link v-if="!isCoach && !isLoading"
-          >Register as a coach</base-button
-        >
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasCoaches">
-        <CoachItem
-          v-for="coach in filteredCoaches"
-          :key="coach.id"
-          :first-name="coach.firstName"
-          :last-name="coach.lastName"
-          :id="coach.id"
-          :rate="coach.hourlyRate"
-          :areas="coach.areas"
-        />
-      </ul>
-      <h3 v-else>No Coaches found</h3>
+      <CoachFilter @change-filter="setFilters" />
     </section>
-  </base-card>
+
+    <base-card>
+      <section>
+        <div class="controls">
+          <base-button mode="outline" @click="loadCoaches(true)"
+            >Refresh</base-button
+          >
+          <base-button to="/register" link v-if="!isCoach && !isLoading"
+            >Register as a coach</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasCoaches">
+          <CoachItem
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :first-name="coach.firstName"
+            :last-name="coach.lastName"
+            :id="coach.id"
+            :rate="coach.hourlyRate"
+            :areas="coach.areas"
+          />
+        </ul>
+        <h3 v-else>No Coaches found</h3>
+      </section>
+    </base-card>
+  </div>
 </template>
 
 <script>
