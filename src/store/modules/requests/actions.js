@@ -22,8 +22,9 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const res = await fetch(
-      `https://vue-find-a-coach-a907f.firebaseio.com/requests/${coachId}.json`
+      `https://vue-find-a-coach-a907f.firebaseio.com/requests/${coachId}.json?auth=${token}`
     );
     const resData = await res.json();
     if (!res.ok) {
